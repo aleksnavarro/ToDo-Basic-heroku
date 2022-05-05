@@ -6,6 +6,7 @@ export class TodoList {
     constructor(){
 
         this.loadFromLocalStorage();
+        this.loadFromAPI();
 
     }
 
@@ -63,5 +64,16 @@ export class TodoList {
         this.todos = this.todos.map( obj => Task.fromJSON(obj));
 
 
+    }
+
+    async loadFromAPI(){
+        const response = await fetch('http://localhost:3000/tasks')
+        const tasks = await response.json()
+
+        //console.log(tasks.length)
+
+        this.todos = tasks.map(task => Task.fromJSON({duty: task.title, id: task._id, isComplete: task.completed, madeAt: new Date(task.start_time)}))
+
+        //console.log(this.todos)
     }
 }

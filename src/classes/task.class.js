@@ -21,7 +21,7 @@ export class Task {
 
     }
 
-    set duty( d ){
+    /*set duty( d ){
         this.duty = d;
-    }
+    }*/
 }
